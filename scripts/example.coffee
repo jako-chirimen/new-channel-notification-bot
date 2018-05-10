@@ -104,3 +104,7 @@ module.exports = (robot) ->
   # robot.respond /sleep it off/i, (res) ->
   #   robot.brain.set 'totalSodas', 0
   #   res.reply 'zzzzz'
+
+# Slack API Check
+robot.router.post '/webhook', (req, res) ->
+    res.send res.body.challenge

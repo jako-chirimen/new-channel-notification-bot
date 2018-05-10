@@ -13,7 +13,7 @@ module.exports = (robot) ->
     robot.router.post '/webhook', (req, res) ->
       data   = JSON.parse req
       console.log(data)
-      res.send res.body.challenge
+      res.send data.body.challenge
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #

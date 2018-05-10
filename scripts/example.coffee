@@ -11,7 +11,8 @@
 module.exports = (robot) ->
 # Slack API Check
     robot.router.post '/webhook', (req, res) ->
-      res.send res.body.challenge
+      data   =  JSON.parse res.body.challenge
+      res.send data
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #

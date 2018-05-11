@@ -9,10 +9,6 @@
 #   These are from the scripting documentation: https://github.com/github/hubot/blob/master/docs/scripting.md
 
 module.exports = (robot) ->
-# Slack API Check
-  robot.router.post '/webhook', (req, res) ->
-    console.log(req)
-    res.send req.body.challenge
   # robot.hear /badger/i, (res) ->
   #   res.send "Badgers? BADGERS? WE DON'T NEED NO STINKIN BADGERS"
   #

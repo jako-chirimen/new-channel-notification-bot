@@ -6,8 +6,5 @@ module.exports = (robot) ->
 # channel_created
   robot.router.post '/webhook', (req, res) ->
     if req.body.type == 'channel_created'
-      robot.messageRoom 'slack-test', 'New channel 👉 #' + req.body.channel.name
+      robot.messageRoom '00_おしらせ', '新しくチャンネルが作成されました！ 👉 #' + req.body.channel.name
       res.end
-  # robot.router.post '/webhook', (req, res) ->
-  #   robot.messageRoom 'slack-test', 'なんかきた'
-  #   res.end

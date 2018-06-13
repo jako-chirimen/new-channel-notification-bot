@@ -8,33 +8,33 @@ module.exports = (robot) ->
           robot.messageRoom process.env.INFO_CHANNEL, '新しくチャンネルが作成されました！ 👉 #' + channelName
           res.send "OK"
 
-        when 'file_created'
-          robot.http("https://slack.com/api/files.info?token=#{process.env.SLACK_API_TOKEN}&file=#{req.body.event.file.id}&pretty=1")
-            .get() (err, res, body) ->
-              data = JSON.parse body
-              if data.ok is true
-                if /image/.test(data.file.mimetype)
-                  # processing image backup
-                  console.log('image type')
+        # when 'file_created'
+        #   robot.http("https://slack.com/api/files.info?token=#{process.env.SLACK_API_TOKEN}&file=#{req.body.event.file.id}&pretty=1")
+        #     .get() (err, res, body) ->
+        #       data = JSON.parse body
+        #       if data.ok is true
+        #         if /image/.test(data.file.mimetype)
+        #           # processing image backup
+        #           console.log('image type')
 
-          robot.http("https://slack.com/api/files.list?token=#{process.env.SLACK_API_TOKEN}")
-            .get() (err, res, body) ->
-              data = JSON.parse body
-              if data.ok is true
-                console.log(data.files.length)
-                if data.files.length >= process.env.FILE_LIMIT
-                   # delete old file
-                   robot.http("https://slack.com/api/files.delete?token=#{process.env.SLACK_API_TOKEN}&file=#{data.files[data.files.length-1].id}&pretty=1")
-                     .get() (err, res, body) ->
-                       # deleted
-                       console.log(body)
-                       robot.http("https://slack.com/api/files.list?token=#{process.env.SLACK_API_TOKEN}")
-                         .get() (err, res, body) ->
-                           data = JSON.parse body
-                           console.log(data.files.length)
-          res.send "OK"
+        #   robot.http("https://slack.com/api/files.list?token=#{process.env.SLACK_API_TOKEN}")
+        #     .get() (err, res, body) ->
+        #       data = JSON.parse body
+        #       if data.ok is true
+        #         console.log(data.files.length)
+        #         if data.files.length >= process.env.FILE_LIMIT
+        #            # delete old file
+        #            robot.http("https://slack.com/api/files.delete?token=#{process.env.SLACK_API_TOKEN}&file=#{data.files[data.files.length-1].id}&pretty=1")
+        #              .get() (err, res, body) ->
+        #                # deleted
+        #                console.log(body)
+        #                robot.http("https://slack.com/api/files.list?token=#{process.env.SLACK_API_TOKEN}")
+        #                  .get() (err, res, body) ->
+        #                    data = JSON.parse body
+        #                    console.log(data.files.length)
+        #   res.send "OK"
 
-        else 
+        else
           console.log req.body
           res.send "OK"
 
